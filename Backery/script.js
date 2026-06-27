@@ -51,6 +51,25 @@ const products = {
 // --- Cart Logic ---
 let cart = [];
 
+// Load cart from localStorage on page load
+function loadCartFromStorage() {
+    const savedCart = localStorage.getItem('velvetWhiskCart');
+    if (savedCart) {
+        try {
+            cart = JSON.parse(savedCart);
+        } catch (e) {
+            console.error('Error loading cart from storage:', e);
+            cart = [];
+    saveCartToStorage();
+        }
+    }
+}
+
+// Save cart to localStorage
+function saveCartToStorage() {
+    localStorage.setItem('velvetWhiskCart', JSON.stringify(cart));
+}
+
 const cartBtn = document.getElementById('openCart');
 const cartSidebar = document.getElementById('cartSidebar');
 const cartOverlay = document.getElementById('cartOverlay');
@@ -62,6 +81,10 @@ const checkoutBtn = document.getElementById('checkoutBtn');
 const checkoutModal = document.getElementById('checkoutModal');
 const closeModalBtn = document.getElementById('closeModal');
 const checkoutForm = document.getElementById('checkoutForm');
+
+// Load cart on initialization
+loadCartFromStorage();
+updateCartUI();
 
 // Open/Close Cart
 cartBtn.addEventListener('click', () => {
@@ -126,6 +149,7 @@ function renderProducts() {
                 cart.push({ ...product, qty: 1 });
             }
             
+            saveCartToStorage();
             updateCartUI();
             
             // Visual feedback
@@ -173,6 +197,7 @@ function updateCartUI() {
         btn.addEventListener('click', (e) => {
             const index = e.currentTarget.dataset.index;
             cart.splice(index, 1);
+            saveCartToStorage();
             updateCartUI();
         });
     });
@@ -217,6 +242,7 @@ checkoutForm.addEventListener('submit', (e) => {
     window.open(whatsappURL, '_blank');
     
     cart = [];
+    saveCartToStorage();
     updateCartUI();
     checkoutForm.reset();
     checkoutModal.classList.remove('active');
@@ -308,33 +334,13 @@ customForm.addEventListener('submit', (e) => {
     uploadedImageUrl = '';
 });
 
-// --- View More Functionality ---
+// --- View More Functionality (Removed - No longer generates dummy products) ---
+// The View More buttons are now hidden via CSS as this functionality has been removed.
+// Product listings are now managed through Decap CMS configuration.
+
+// Hide all view more buttons
 document.querySelectorAll('.view-more-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const category = e.target.dataset.category;
-        const grid = document.getElementById(`${category}-grid`);
-        const currentProducts = products[category];
-        
-        // For demo, we'll duplicate existing products with slight modifications
-        const newProducts = currentProducts.map((p, i) => ({
-            ...p,
-            id: p.id + 100 + i,
-            name: `${p.name} (Variant ${i + 1})`,
-            price: p.price + Math.floor(Math.random() * 100)
-        }));
-        
-        products[category] = [...products[category], ...newProducts];
-        renderProducts();
-        
-        // Scroll to the grid
-        grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        // Change button text
-        e.target.textContent = `Loading More ${category}...`;
-        setTimeout(() => {
-            e.target.textContent = `View More ${category.charAt(0).toUpperCase() + category.slice(1)}`;
-        }, 1000);
-    });
+    btn.style.display = 'none';
 });
 
 // --- Particle System (Flour Dust Effect) ---
@@ -443,3 +449,29 @@ magneticBtns.forEach(btn => {
 
 // Initialize
 renderProducts();
+// --- Hamburger Menu Toggle ---
+const hamburgerMenu = document.getElementById('hamburgerMenu');
+const navLinks = document.getElementById('navLinks');
+
+if (hamburgerMenu && navLinks) {
+    hamburgerMenu.addEventListener('click', () => {
+        hamburgerMenu.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburgerMenu.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburgerMenu.contains(e.target) && !navLinks.contains(e.target)) {
+            hamburgerMenu.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
+}

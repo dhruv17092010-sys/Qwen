@@ -1,0 +1,10 @@
+cards:
+  - icon: "fas fa-leaf"
+    title: "100% Organic"
+    desc: "Pure ingredients, no preservatives."
+  - icon: "fas fa-truck-fast"
+    title: "Swift Delivery"
+    desc: "Fresh from the oven to your doorstep."
+  - icon: "fab fa-whatsapp"
+    title: "Direct Chat"
+    desc: "Order seamlessly via WhatsApp."

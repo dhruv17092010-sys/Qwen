@@ -110,6 +110,45 @@ h1, h2, h3 {
     width: 100%;
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.hamburger-menu span {
+    width: 100%;
+    height: 3px;
+    background: var(--rose-bold);
+    border-radius: 3px;
+    transition: var(--transition);
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 .cart-btn {
     background: var(--pink-main);
     border: none;
@@ -206,6 +245,17 @@ h1, h2, h3 {
     color: var(--text-light);
     margin-bottom: 2.5rem;
     font-weight: 300;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-custom-cake {
+    background: linear-gradient(135deg, var(--pink-dark), var(--rose-bold));
 }
 
 /* --- Buttons --- */
@@ -860,11 +910,37 @@ textarea {
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .hero-title { font-size: 2.8rem; }
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(253, 248, 245, 0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: var(--transition);
+        box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .hero-title { font-size: 2.5rem; }
     .custom-container { grid-template-columns: 1fr; }
     .footer-content { grid-template-columns: 1fr; text-align: center; }
     .trust-section { flex-direction: column; align-items: center; }
     .form-row { grid-template-columns: 1fr; }
     .category-title { font-size: 1.5rem; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    .btn-magnetic { width: 100%; max-width: 300px; justify-content: center; }
 }

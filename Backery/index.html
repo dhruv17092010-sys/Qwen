@@ -22,16 +22,23 @@
                 <span>Velvet Whisk</span>
             </div>
         </div>
-        <nav class="nav-links">
+        <nav class="nav-links" id="navLinks">
             <a href="#home">Home</a>
             <a href="#menu">Menu</a>
             <a href="#custom">Custom Cakes</a>
             <a href="#contact">Contact</a>
         </nav>
-        <button class="cart-btn" id="openCart">
-            <i class="fas fa-shopping-bag"></i>
-            <span class="cart-count">0</span>
-        </button>
+        <div class="nav-actions">
+            <button class="cart-btn" id="openCart">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </button>
+            <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </header>
 
     <!-- Hero Section -->
@@ -45,7 +52,10 @@
         <div class="hero-content">
             <h1 class="hero-title">Baked with <span class="highlight">Passion</span>,<br> Served with <span class="highlight">Love</span>.</h1>
             <p class="hero-subtitle">Experience the luxury of artisan bakes, delivered straight to your door via WhatsApp.</p>
-            <a href="#menu" class="btn-magnetic">Explore Our Menu <i class="fas fa-arrow-right"></i></a>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn-magnetic">Explore Our Menu <i class="fas fa-arrow-right"></i></a>
+                <a href="#custom" class="btn-magnetic btn-custom-cake">Order Custom Cake <i class="fas fa-birthday-cake"></i></a>
+            </div>
         </div>
     </section>
 
