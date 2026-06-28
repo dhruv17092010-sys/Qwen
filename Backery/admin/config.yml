@@ -1,0 +1,58 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "hero"
+    label: "Hero Section"
+    files:
+      - file: "_data/hero.yml"
+        name: "hero_settings"
+        label: "Hero Settings"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - { label: "Primary Button Text", name: "primaryBtnText", widget: "string" }
+          - { label: "Custom Cake Button Text", name: "customCakeBtnText", widget: "string" }
+
+  - name: "products"
+    label: "Products"
+    folder: "_data/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Product Name", name: "name", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["cakes", "breads", "pastries", "cookies", "muffins", "savory", "dried"] }
+      - { label: "Price (₹)", name: "price", widget: "number" }
+      - { label: "Description", name: "desc", widget: "text" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Badges", name: "badges", widget: "list", default: [], options: ["eggless", "vegan"], required: false }
+
+  - name: "trust_section"
+    label: "Trust Section"
+    files:
+      - file: "_data/trust.yml"
+        name: "trust_settings"
+        label: "Trust Settings"
+        fields:
+          - label: "Trust Cards"
+            name: "cards"
+            widget: "list"
+            fields:
+              - { label: "Icon Class", name: "icon", widget: "string", default: "fas fa-leaf" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "desc", widget: "text" }
+
+  - name: "contact"
+    label: "Contact & Footer"
+    files:
+      - file: "_data/contact.yml"
+        name: "contact_settings"
+        label: "Contact Settings"
+        fields:
+          - { label: "WhatsApp Number", name: "whatsappNumber", widget: "string" }
+          - { label: "Address", name: "address", widget: "string" }
+          - { label: "Footer Tagline", name: "footerTagline", widget: "text" }
