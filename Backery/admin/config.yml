@@ -2,14 +2,16 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "assets/images"
+local_backend: true
+
+media_folder: "Backery/assets/images"
 public_folder: "/assets/images"
 
 collections:
   - name: "hero"
     label: "Hero Section"
     files:
-      - file: "_data/hero.yml"
+      - file: "Backery/_data/hero.yml"
         name: "hero_settings"
         label: "Hero Settings"
         fields:
@@ -20,7 +22,7 @@ collections:
 
   - name: "products"
     label: "Products"
-    folder: "_data/products"
+    folder: "Backery/_data/products"
     create: true
     slug: "{{slug}}"
     fields:
@@ -34,7 +36,7 @@ collections:
   - name: "trust_section"
     label: "Trust Section"
     files:
-      - file: "_data/trust.yml"
+      - file: "Backery/_data/trust.yml"
         name: "trust_settings"
         label: "Trust Settings"
         fields:
@@ -49,7 +51,7 @@ collections:
   - name: "contact"
     label: "Contact & Footer"
     files:
-      - file: "_data/contact.yml"
+      - file: "Backery/_data/contact.yml"
         name: "contact_settings"
         label: "Contact Settings"
         fields:
